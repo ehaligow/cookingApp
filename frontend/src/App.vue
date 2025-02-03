@@ -37,9 +37,8 @@ nav {
 }
 
 nav a {
-  text-align:center;
+  text-align: center;
   padding: 0 1rem;
   margin: 1rem;
 }
-
 </style>
