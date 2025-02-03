@@ -3,7 +3,8 @@
     <h1>Recipes</h1>
     <ul>
       <li v-for="r in recipes" :key="r.id">
-        <RouterLink :to="`/recipes/${r.slug}`">{{ r.title }}</RouterLink>
+        {{ r.slug }}
+        <RouterLink :to="{ path: `/recipes/${r.slug}` }">{{ r.title }}</RouterLink>
       </li>
     </ul>
   </div>
