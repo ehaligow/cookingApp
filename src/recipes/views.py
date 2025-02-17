@@ -3,6 +3,7 @@ from .models import Recipe
 from .serializers import RecipeSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from rest_framework import status
 
 
 class RecipesList(APIView):
@@ -20,3 +21,12 @@ class RecipeDetailView(APIView):
             raise NotFound(detail="Recipe not found")
         serializer = RecipeSerializer(recipe)
         return Response(serializer.data)
+
+
+class RecipeCeateView(APIView):
+    def post(self, request):
+        serializer = RecipeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
