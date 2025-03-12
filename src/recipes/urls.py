@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from . import views
 
 urlpatterns = [
-    path('', views.RecipesList.as_view()),
-    path('<slug:product_slug>/', views.RecipeDetailView.as_view()),
-    path('create', views.RecipeCeateView.as_view())
+    path('/', views.RecipesList.as_view()),
+    path('/<slug:product_slug>/', views.RecipeDetailView.as_view()),
+    path('/create', views.RecipeCeateView.as_view()),
 ]

@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from .models import Recipe
 from .serializers import RecipeSerializer
 from rest_framework.response import Response
@@ -6,11 +7,16 @@ from rest_framework.exceptions import NotFound
 from rest_framework import status
 
 
-class RecipesList(APIView):
-    def get(self, request, format=None):
-        recipes = Recipe.objects.all()
-        serializer = RecipeSerializer(recipes, many=True)
-        return Response(serializer.data)
+class RecipesList(ListAPIView):
+    serializer_class = RecipeSerializer
+
+    def get_queryset(self):
+        queryset = Recipe.objects.all()
+        categories = self.request.query_params.getlist('categories')
+        if categories:
+            for category in categories:
+                queryset = queryset.filter(categories__name__iexact=category)
+        return queryset
 
 
 class RecipeDetailView(APIView):
