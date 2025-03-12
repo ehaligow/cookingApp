@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'recipes.apps.RecipesConfig',
+    'category.apps.CategoryConfig',
 ]
 
 MIDDLEWARE = [
