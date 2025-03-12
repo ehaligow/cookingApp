@@ -10,3 +10,8 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return f'/{self.slug}'
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = f"{self.name}"
+        super().save(*args, **kwargs)
